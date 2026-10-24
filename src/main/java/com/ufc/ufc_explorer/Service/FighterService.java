@@ -41,5 +41,9 @@ public class FighterService {
 		fighterRepo.deleteById(id);
 		return fighter;
 	}
+	
+	public Fighter createFighter(Fighter fighter) {
+		return fighterRepo.save(fighter);
+	}
 
 }

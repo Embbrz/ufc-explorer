@@ -16,5 +16,6 @@ public interface FigtherRepository extends JpaRepository<Fighter, Long>{
 	
 	@Query("SELECT f FROM Fighter f WHERE LOWER(f.weightClass) = LOWER(:weightClass)")
 	Page<Fighter> findAllByweightClass(@Param("weightClass")String weightClass, Pageable pageable);
+	
 
 }
