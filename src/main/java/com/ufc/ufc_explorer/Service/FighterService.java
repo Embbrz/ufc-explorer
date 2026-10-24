@@ -30,5 +30,10 @@ public class FighterService {
 		
 		
 	}
+	
+	public Fighter byId(Long id) {
+		return fighterRepo.findById(id)
+				.orElseThrow(() -> new RuntimeException("Fighter with the ID " + id + " Not Found"));
+	}
 
 }
