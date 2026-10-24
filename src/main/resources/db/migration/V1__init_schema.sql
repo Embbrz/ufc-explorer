@@ -1,5 +1,5 @@
 CREATE TABLE fighters (
-	id SERIAL PRIMARY KEY,
+	id BIGSERIAL PRIMARY KEY,
 	first_name VARCHAR(50) NOT NULL,
 	last_name VARCHAR(50) NOT NULL,
 	nickname VARCHAR(50),
@@ -12,19 +12,19 @@ CREATE TABLE fighters (
 );
 
 CREATE TABLE events (
-	id SERIAL PRIMARY KEY,
+	id BIGSERIAL PRIMARY KEY,
 	event_name VARCHAR(50) NOT NULL,
 	event_date DATE NOT NULL,
 	location VARCHAR(100)
 );
 
 CREATE TABLE bouts (
-	id SERIAL PRIMARY KEY,
-	event_id INT REFERENCES events(id) ON DELETE CASCADE,
-	fighter_a_id INT REFERENCES fighters(id) ON DELETE CASCADE,
-	fighter_b_id INT REFERENCES fighters(id) ON DELETE CASCADE,
+	id BIGSERIAL PRIMARY KEY,
+	event_id BIGINT REFERENCES events(id) ON DELETE CASCADE,
+	fighter_a_id BIGINT REFERENCES fighters(id) ON DELETE CASCADE,
+	fighter_b_id BIGINT REFERENCES fighters(id) ON DELETE CASCADE,
 	weight_class VARCHAR(30) NOT NULL,
 	is_title_fight BOOLEAN DEFAULT FALSE,
-	winner_id INT REFERENCES fighters(id) ON DELETE SET NULL,
+	winner_id BIGINT REFERENCES fighters(id) ON DELETE SET NULL,
 	method_of_victory VARCHAR(50)
 );
