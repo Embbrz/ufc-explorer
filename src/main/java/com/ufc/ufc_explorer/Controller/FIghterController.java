@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ufc.ufc_explorer.Entity.Fighter;
 import com.ufc.ufc_explorer.Service.FighterService;
+import com.ufc.ufc_explorer.dto.ChangeRequest;
 
 @RestController
 @RequestMapping("/Fighters")
@@ -49,6 +51,13 @@ public class FIghterController {
 	@PostMapping("/api/fighters/create")
 	public Fighter createFighter(@RequestBody Fighter fighter) {
 		return this.fighterService.createFighter(fighter);
+	}
+	
+	@PutMapping("/api/fighters/update")
+	public Fighter updateFighter(@RequestBody ChangeRequest update) {
+		return this.fighterService.updateFighter(update.id(), update.firstName(), update.lastName(),
+				update.nickName(), update.weightClass(), update.wins(), update.losses(), update.draws(), 
+				update.strikingAccuracy(), update.reachInches());
 	}
 
 
