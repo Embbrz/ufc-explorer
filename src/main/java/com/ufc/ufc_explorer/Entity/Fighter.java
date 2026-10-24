@@ -2,6 +2,8 @@ package com.ufc.ufc_explorer.Entity;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -15,6 +17,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "fighters")
 @Data
 @NoArgsConstructor
+@JsonPropertyOrder({ "id", "firstName", "lastName", "nickName", "weightClass", "wins", "losses", "draws", "strikingAccuracy", "reachInches" })
 public class Fighter {
 	
 	@Id
