@@ -35,5 +35,11 @@ public class FighterService {
 		return fighterRepo.findById(id)
 				.orElseThrow(() -> new RuntimeException("Fighter with the ID " + id + " Not Found"));
 	}
+	
+	public Fighter deleteById(Long id) {
+		Fighter fighter = this.byId(id);
+		fighterRepo.deleteById(id);
+		return fighter;
+	}
 
 }
