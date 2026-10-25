@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.ufc.ufc_explorer.Entity.Fighter;
 import com.ufc.ufc_explorer.Repository.FigtherRepository;
+import com.ufc.ufc_explorer.dto.HeadToHeadRespone;
 
 @Service
 public class FighterService {
@@ -66,13 +67,13 @@ public class FighterService {
 		if (weightClass != null) {
 			fighter.setWeightClass(weightClass);
 		}
-		if (wins != null) {
+		if ((wins != null) && (wins >= 0)) {
 			fighter.setWins(wins);
 		}
-		if (losses != null) {
+		if ((losses != null) && (losses >= 0)) {
 			fighter.setLosses(losses);
 		}
-		if (draws != null) {
+		if ((draws != null) && (draws >= 0)) {
 			fighter.setDraws(draws);
 		}
 		if (strikingAccuracy != null) {
@@ -82,6 +83,38 @@ public class FighterService {
 			fighter.setReachInches(reachInches);
 		}
 		return fighterRepo.save(fighter);
+	}
+	
+	public HeadToHeadRespone compare(Long fighterA, Long fighterB){
+		Fighter fighter1 = this.byId(fighterA);
+		Fighter fighter2 = this.byId(fighterB);
+		String name1 = fighter1.getFirstName() + " " + fighter1.getLastName();
+		String name2 = fighter2.getFirstName() + " " + fighter2.getLastName();
+		String reachA = name1 +" has an equal reach to " + name2;
+		String strikingA = name1 +" has an equals striking accuracy to " + name2;
+		String weightMatchup = "Equal-weight comparison (" + fighter1.getWeightClass() +" vs " + fighter2.getWeightClass() +")";
+		int reachComp = fighter1.getReachInches().compareTo(fighter2.getReachInches());
+		int strikingComp = fighter1.getStrikingAccuracy().compareTo(fighter2.getStrikingAccuracy());
+		if (reachComp > 0) {
+			reachA = name1 +" has a reach advantage over " + name2;
+		}
+		if (reachComp < 0) {
+			reachA = name2 + " has a reach advantage over " + name1;
+		}
+		if (strikingComp > 0) {
+			strikingA = name1 + " has a higher striking accuracy over " + name2;
+		}
+		if (strikingComp < 0) {
+			strikingA = name2 + " has a higher striking accuracy over " + name1;
+		}
+		if (!(fighter1.getWeightClass().toLowerCase().equalsIgnoreCase(fighter2.getWeightClass().toLowerCase()))) {
+			weightMatchup = "Cross-weight comparison (" + fighter1.getWeightClass() +" vs " +fighter2.getWeightClass() +")";
+		}
+		
+		return new HeadToHeadRespone(fighter1, fighter2, reachA, strikingA, weightMatchup);
+		
+		
+		
 	}
 
 }

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.sun.jdi.event.Event;
+import com.ufc.ufc_explorer.Entity.Event;
 import com.ufc.ufc_explorer.Service.EventService;
 
 @RestController

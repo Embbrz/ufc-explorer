@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ufc.ufc_explorer.Entity.Fighter;
 import com.ufc.ufc_explorer.Service.FighterService;
 import com.ufc.ufc_explorer.dto.ChangeRequest;
+import com.ufc.ufc_explorer.dto.HeadToHeadRespone;
 
 @RestController
 @RequestMapping("/Fighters")
@@ -58,6 +59,13 @@ public class FIghterController {
 		return this.fighterService.updateFighter(update.id(), update.firstName(), update.lastName(),
 				update.nickName(), update.weightClass(), update.wins(), update.losses(), update.draws(), 
 				update.strikingAccuracy(), update.reachInches());
+	}
+	
+	@GetMapping("/head-to-head")
+	public HeadToHeadRespone compareFighter(
+			@RequestParam Long fighterA,
+			@RequestParam Long fighterB){
+		return this.fighterService.compare(fighterA, fighterB);
 	}
 
 
