@@ -55,5 +55,21 @@ public class EventService {
 		
 		return card;
 	}
+	
+	public List<Bout> deleteFight(Long id, Long boutId){
+		this.byId(id);
+		
+
+		
+		List<Bout> bouts = this.eventCard(id);
+		
+		for (int i = 0; i < bouts.size(); i++) {
+			if (bouts.get(i).getId().equals(boutId)) {
+				boutRepo.deleteById(boutId);
+				return this.eventCard(id);
+			}
+		}
+		throw new RuntimeException("Bout was Not in Event " + id  );
+	}
 
 }
