@@ -46,7 +46,13 @@ public class EventController {
 	
 	@GetMapping("/{id}/card")
 	public List<Bout> eventCard(@PathVariable Long id){
-		return this.eventCard(id);
+		return this.eventService.eventCard(id);
+	}
+	
+	@PostMapping("/{id}/bouts")
+	public List<Bout> addFight(@PathVariable Long id, 
+			@RequestBody Bout bout){
+		return this.eventService.addFight(id, bout);
 	}
 
 }

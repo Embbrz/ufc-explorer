@@ -43,5 +43,17 @@ public class EventService {
 		
 		return boutRepo.findByEventId(id);
 	}
+	
+	public List<Bout> addFight(Long id, Bout bout){
+	
+		
+
+		bout.setEvent(this.byId(id));
+		boutRepo.save(bout);
+		
+		List<Bout> card = this.eventCard(id);
+		
+		return card;
+	}
 
 }
